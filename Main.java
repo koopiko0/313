@@ -1,8 +1,8 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-class Calculator {
-    public static String intToRoman(int num) {
+class Main {
+    public static String calc(int num) {
         if (num < 1 || num > 3999) {
             throw new IllegalArgumentException("Number should be in range [1, 3999]");
         }
@@ -33,6 +33,10 @@ class Calculator {
 
         try {
             String[] parts = primer.split(" ");
+            if(parts.length != 3) {
+                throw new java.lang.Error();
+
+            }
             if ((Arrays.binarySearch(rim, parts[0]) >= 0) && (Arrays.binarySearch(rim, parts[2]) >= 0)) {
                 flag_rim = true;
             };
@@ -91,7 +95,7 @@ class Calculator {
             }
 
             if (flag_rim == true) {
-                System.out.println((intToRoman(ans)));
+                System.out.println((calc(ans)));
             } else {
                 System.out.println(ans);
             }
