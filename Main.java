@@ -1,12 +1,11 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-class Main {
+class Calculator {
     public static String calc(int num) {
         if (num < 1 || num > 3999) {
-            throw new IllegalArgumentException("Number should be in range [1, 3999]");
+            throw new Error();
         }
-
         String[] M = {"", "M", "MM", "MMM"};
         String[] C = {"", "C", "CC", "CCC", "CD", "D",
                 "DC", "DCC", "DCCC", "CM"};
@@ -21,6 +20,8 @@ class Main {
 
     public static void main(String[] args) {
         int ans;
+        int a;
+        int b;
         Scanner sc = new Scanner(System.in);
         System.out.print("Введите пример: ");
         String primer = sc.nextLine();
@@ -28,8 +29,6 @@ class Main {
         String[] arab = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
         String[] rim = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
         boolean flag_rim = false;
-
-
 
         try {
             String[] parts = primer.split(" ");
@@ -39,37 +38,10 @@ class Main {
             }
             if ((Arrays.binarySearch(rim, parts[0]) >= 0) && (Arrays.binarySearch(rim, parts[2]) >= 0)) {
                 flag_rim = true;
-            };
-            //Перевод с римских в арабские
-            int a = switch (parts[0]) {
-                case "I" -> 1;
-                case "II" -> 2;
-                case "III" -> 3;
-                case "IV" -> 4;
-                case "V" -> 5;
-                case "VI" -> 6;
-                case "VII" -> 7;
-                case "VIII" -> 8;
-                case "IX" -> 9;
-                case "X" -> 10;
-                default -> Integer.parseInt(parts[0]);
-            };
+            }
+             a = perevod(parts, 0);
+             b = perevod(parts, 2);
 
-            int b = switch (parts[2]) {
-                case "I" -> 1;
-                case "II" -> 2;
-                case "III" -> 3;
-                case "IV" -> 4;
-                case "V" -> 5;
-                case "VI" -> 6;
-                case "VII" -> 7;
-                case "VIII" -> 8;
-                case "IX" -> 9;
-                case "X" -> 10;
-                default -> Integer.parseInt(parts[2]);
-            };
-
-            // Операции над числами вывод арабским числом
             ans = switch (parts[1]) {
                 case "+" -> a + b;
                 case "-" -> a - b;
@@ -83,13 +55,10 @@ class Main {
 
             if ((Arrays.binarySearch(arab, a1) >= 0) && (Arrays.binarySearch(rim, b1) >= 0)) { // Выводит индекс
                 throw new Error();
-            };
+            }
             if ((Arrays.binarySearch(arab, b1) >= 0) && (Arrays.binarySearch(rim, a1) >= 0)) { // Выводит индекс
                 throw new Error();
-            };
-
-
-
+            }
             if ((a < 1) | (a > 10) | (b < 1) | (b > 10)) {
                 throw new java.lang.Error();
             }
@@ -105,5 +74,22 @@ class Main {
         } catch (Exception e) {
             throw new java.lang.Error();
         }
+    }
+
+    private static int perevod(String[] parts, int x) {
+        int a = switch (parts[x]) {
+            case "I" -> 1;
+            case "II" -> 2;
+            case "III" -> 3;
+            case "IV" -> 4;
+            case "V" -> 5;
+            case "VI" -> 6;
+            case "VII" -> 7;
+            case "VIII" -> 8;
+            case "IX" -> 9;
+            case "X" -> 10;
+            default -> Integer.parseInt(parts[x]);
+        };
+        return a;
     }
 }
